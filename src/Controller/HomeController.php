@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Communes;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,8 +13,9 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        $communes = $this->getDoctrine()->getRepository(Communes::class)->findAll();
+
+
+        return $this->render('home/index.html.twig', ['communes' => $communes]);
     }
 }
